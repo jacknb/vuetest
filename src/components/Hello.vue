@@ -25,6 +25,7 @@ export default {
   name: 'hello',
   data () {
     return {
+      value: [20,50],
       msg: 'Welcome to Your Vue.js App'
     }
   }

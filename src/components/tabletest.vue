@@ -1,14 +1,12 @@
 <template>
-    <div id="app">
-        {{message}}
-    </div>
+    <Radio v-model="single">Radio</Radio>
 </template>
 <script>
 export default {
     name: "tabletest",
     data() {
         return {
-            message: "Hello Vue!"
+            single: false
         }
     }
 }
