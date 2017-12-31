@@ -13,51 +13,46 @@
                 <input v-model="question" />
             </p>
             <p>{{answer}}</p>
+            <h3 v-if="ok">Is Ok</h3>
+            <h3 v-else>NO</h3>
+            <div v-if="Math.random()>0.5">
+                Now you see me.
+            </div>
+            <div v-else>
+                Now you don't.
+            </div>
+            <div v-if="type=='A'">A</div>
+            <div v-else-if="type=='B'">B</div>
+            <div v-else-if="type=='C'">C</div>
+            <div v-else>NOT A/B/C</div>
         </div>
     </div>
 </template>
 
 <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
 <script>
 export default {
     name: "tabletest",
     data() {
         return {
+            ok: true,
             single: false,
             message: 'Hello',
             question: '',
-            answer: 'I cannot give you an answer until you ask a question!'
+            answer: 'I cannot give you an answer until you ask a question!',
+            type: 'A'
         }
     },
     watch: {
         question: function(newQusetion) {
             this.answer = 'Waiting for you to stop typing...';
-            this.getAnswer()
         }
     },
     methods: {
         reversedMessage: function() {
             return this.message.split('').reverse().join('');
-        },
-        getAnswer: _.debounce(function() {
-            if (this.question.indexOf('?') === -1) {
-                this.answer = 'Questions usually contain a question mark. ;-)'
-                return
-            }
-            this.answer = 'Thinking...'
-            var vm = this
-            axios.get('https://yesno.wtf/api')
-                .then(function(response) {
-                    vm.answer = _.capitalize(response.data.answer)
-                })
-                .catch(function(error) {
-                    vm.answer = 'Error! Could not reach the API. ' + error
-                })
-        },
-            // 这是我们为用户停止输入等待的毫秒数
-            500
-        )
+        }
     }
 }
 </script>
