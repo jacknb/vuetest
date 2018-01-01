@@ -25,6 +25,12 @@
             <div v-else-if="type=='B'">B</div>
             <div v-else-if="type=='C'">C</div>
             <div v-else>NOT A/B/C</div>
+            <h1 v-show="showMe">Show Me</h1>
+            <ul>
+                <li v-for="(item,index) of items" :key="item.message">
+                    {{parentMessage}}-{{index}}-{{item.message}}
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -41,7 +47,17 @@ export default {
             message: 'Hello',
             question: '',
             answer: 'I cannot give you an answer until you ask a question!',
-            type: 'A'
+            type: 'A',
+            showMe:true,
+            parentMessage: 'Parent',
+            items:[
+                {
+                    message:'AAA'
+                },
+                {
+                    message:'BBB'
+                }
+            ]
         }
     },
     watch: {
